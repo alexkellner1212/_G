@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GSV Eintracht Baunatal - Wintercup 2026</title>
+    <style>
+        :root {
+            --gsv-blue: #00458b;
+            --gsv-white: #ffffff;
+            --accent-silver: #e5e5e5;
+        }
+
+        body, html {
+            margin: 0; padding: 0; height: 100%;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: var(--gsv-white);
+            overflow: hidden;
+        }
+
+        /* Eintracht Header */
+        header {
+            background-color: var(--gsv-blue);
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            color: white;
+            border-bottom: 6px solid var(--accent-silver);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .gsv-logo {
+            height: 90px;
+            background: white;
+            padding: 8px;
+            border-radius: 10px;
+        }
+
+        /* QR-Code Box Fix */
+        .qr-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: white;
+            padding: 8px;
+            border-radius: 10px;
+            border: 2px solid var(--accent-silver);
+        }
+
+        .qr-code {
+            width: 80px;
+            height: 80px;
+            display: block;
+        }
+
+        .qr-text {
+            font-size: 0.75rem;
+            font-weight: 900;
+            margin-top: 4px;
+            color: var(--gsv-blue);
+            text-transform: uppercase;
+        }
+
+        .header-title {
+            text-align: right;
+        }
+
+        .header-title h1 {
+            margin: 0;
+            font-size: 2.8rem;
+            text-transform: uppercase;
+            font-weight: 900;
+        }
+
+        .header-title p {
+            margin: 0;
+            font-size: 1.2rem;
+            color: var(--accent-silver);
+        }
+
+        /* Hauptbereich Spielplan */
+        main {
+            height: calc(100vh - 290px);
+            width: 100%;
+            background: #f0f0f0;
+        }
+
+        iframe {
+            border: none;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Sponsoren-Footer */
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 170px;
+            background: var(--gsv-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 80px;
+            border-top: 8px solid var(--gsv-blue);
+        }
+
+        .sponsor-container {
+            display: flex;
+            align-items: center;
+            gap: 80px;
+        }
+
+        footer img {
+            height: 100px;
+            max-width: 380px;
+            object-fit: contain;
+        }
+
+        .divider {
+            width: 3px; height: 100px; background: #ddd;
+        }
+
+        .label-box {
+            position: absolute;
+            top: -28px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gsv-blue);
+            color: white;
+            padding: 6px 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border-radius: 25px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-left">
+        <img src="https://www.eintracht-baunatal.de/assets/images/5/GSV-Logo-c806e7ce.svg" alt="GSV Logo" class="gsv-logo">
+        
+        <div class="qr-section">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://mytman.io/turnierplan-vollbild/?turnier_id=6379" alt="QR Spielplan" class="qr-code">
+            <div class="qr-text">Spielplan</div>
+        </div>
+    </div>
+
+    <div class="header-title">
+        <h1>Wintercup 2026</h1>
+        <p>GSV Eintracht Baunatal e.V.</p>
+    </div>
+</header>
+
+<main>
+    <iframe src="https://mytman.io/turnierplan-vollbild/?turnier_id=6379&turniermodus=7&showheader=0&showinfo=0&showsponsors=0&refresh=1&showlogos=1"></iframe>
+</main>
+
+<footer>
+    <div class="label-box">Unsere Partner</div>
+    <div class="sponsor-container">
+        <img src="https://www.neofit-studio.de/wp-content/uploads/2025/03/neofit-logo.png" alt="Neofit">
+        <div class="divider"></div>
+        <img src="https://deltatrans.de/wp-content/uploads/2023/04/deltatrans_logo_90.png" alt="Deltatrans">
+    </div>
+</footer>
+
+</body>
+</html>
