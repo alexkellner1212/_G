@@ -7,48 +7,47 @@
     <style>
         :root {
             --gsv-blue: #00458b;
-            --gsv-blue-light: #0056ad;
             --gsv-white: #ffffff;
             --accent-silver: #e5e5e5;
-            --sponsor-bg: #f9f9f9;
         }
 
         * { box-sizing: border-box; }
 
         body, html {
             margin: 0; padding: 0; height: 100%;
-            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             background-color: var(--gsv-white);
             display: flex;
             flex-direction: column;
-            overflow: hidden; /* Verhindert Scrollen der Hauptseite */
+            overflow: hidden;
         }
 
         /* --- HEADER --- */
         header {
-            background: linear-gradient(135deg, var(--gsv-blue) 0%, var(--gsv-blue-light) 100%);
+            background-color: var(--gsv-blue);
             color: white;
             padding: 10px 30px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-bottom: 4px solid var(--accent-silver);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            border-bottom: 5px solid var(--accent-silver);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
             z-index: 10;
+            height: 110px;
         }
 
         .header-left {
             display: flex;
             align-items: center;
-            gap: 25px;
+            gap: 15px;
+            flex: 1; /* Nimmt Platz links ein */
         }
 
         .gsv-logo {
             height: 75px;
             background: white;
-            padding: 8px;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 5px;
+            border-radius: 8px;
         }
 
         .claim-img {
@@ -58,49 +57,64 @@
 
         .qr-section {
             background: white;
-            padding: 6px;
+            padding: 5px;
             border-radius: 8px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            transition: transform 0.3s ease;
         }
-
-        .qr-section:hover { transform: scale(1.05); }
 
         .qr-code { width: 60px; height: 60px; }
+        .qr-text { color: var(--gsv-blue); font-size: 0.6rem; font-weight: 900; margin-top: 2px; text-transform: uppercase; }
 
-        .qr-text {
-            color: var(--gsv-blue);
-            font-size: 0.6rem;
-            font-weight: 900;
-            margin-top: 2px;
-            text-transform: uppercase;
+        /* --- NEU: UHRZEIT & DATUM MITTE --- */
+        .header-center {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
         }
 
-        .header-info { text-align: right; }
-
-        .header-info h1 {
-            margin: 0;
-            font-size: 2.2rem;
-            text-transform: uppercase;
+        #clock {
+            font-size: 2.8rem;
             font-weight: 900;
-            letter-spacing: 1px;
             line-height: 1;
+            font-variant-numeric: tabular-nums; /* Verhindert Wackeln der Zahlen */
         }
 
-        .header-info p {
-            margin: 5px 0 0 0;
+        #date {
             font-size: 1.1rem;
             color: var(--accent-silver);
-            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 2px;
+        }
+
+        .header-right {
+            flex: 1;
+            text-align: right;
+        }
+
+        .header-right h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            font-weight: 900;
+        }
+
+        .header-right p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: var(--accent-silver);
         }
 
         /* --- MAIN / IFRAME --- */
         main {
             flex-grow: 1;
             position: relative;
-            background: #eee;
+            background: #f4f4f4;
         }
 
         iframe {
@@ -109,23 +123,21 @@
             border: none;
         }
 
-        /* --- OPTIMIERTER SPONSOREN-FOOTER --- */
+        /* --- FOOTER --- */
         footer {
             background: var(--gsv-white);
-            border-top: 5px solid var(--gsv-blue);
-            padding: 15px 20px 10px 20px;
+            border-top: 6px solid var(--gsv-blue);
+            padding: 15px;
             position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 110px;
+            min-height: 100px;
         }
 
         .label-box {
             position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
+            top: -18px;
             background: var(--gsv-blue);
             color: white;
             padding: 4px 25px;
@@ -133,66 +145,19 @@
             font-weight: bold;
             font-size: 0.85rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            border: 2px solid var(--accent-silver);
         }
 
-        .sponsor-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 60px;
-            width: 100%;
-            max-width: 1200px;
-        }
-
-        .sponsor-wrapper {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.4s ease;
-            animation: softPulse 4s infinite ease-in-out;
-        }
-
-        /* Sanftes Hervorheben der Werbung */
-        @keyframes softPulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.03); }
-            100% { transform: scale(1); }
-        }
-
-        .sponsor-container img {
-            height: 75px;
-            max-width: 250px;
-            object-fit: contain;
-            filter: grayscale(20%);
-            transition: filter 0.3s ease;
-        }
-
-        .sponsor-wrapper:hover img {
-            filter: grayscale(0%);
-        }
-
-        .divider {
-            width: 1px;
-            height: 50px;
-            background: linear-gradient(to bottom, transparent, #ccc, transparent);
-        }
+        .sponsor-container { display: flex; align-items: center; gap: 50px; }
+        .sponsor-container img { height: 60px; max-width: 180px; object-fit: contain; }
+        .divider { width: 1px; height: 50px; background: #ddd; }
 
         /* --- MOBILE OPTIMIERUNG --- */
-        @media (max-width: 850px) {
-            header {
-                flex-direction: column;
-                padding: 15px;
-                gap: 15px;
-            }
-            .qr-section { display: none; }
-            .header-info { text-align: center; }
-            .header-info h1 { font-size: 1.6rem; }
-            footer { padding-top: 25px; }
-            .sponsor-container { gap: 30px; }
-            .sponsor-container img { height: 50px; max-width: 140px; }
-            .sponsor-wrapper { animation: none; }
+        @media (max-width: 900px) {
+            header { height: auto; flex-direction: column; padding: 15px; gap: 10px; }
+            .header-left, .header-right { flex: none; width: 100%; justify-content: center; text-align: center; }
+            .qr-section, .claim-img { display: none; }
+            #clock { font-size: 2rem; }
         }
     </style>
 </head>
@@ -207,9 +172,15 @@
             <div class="qr-text">Mobil-Plan</div>
         </div>
     </div>
-    <div class="header-info">
+
+    <div class="header-center">
+        <div id="clock">00:00:00</div>
+        <div id="date">WIRD GELADEN...</div>
+    </div>
+
+    <div class="header-right">
         <h1>Wintercup 2026</h1>
-        <p>E-Jugend (Jahrgang 2016)</p>
+        <p>E-Jugend (Jg. 2016)</p>
     </div>
 </header>
 
@@ -220,26 +191,34 @@
 <footer>
     <div class="label-box">Unsere Partner</div>
     <div class="sponsor-container">
-        
-        <div class="sponsor-wrapper">
-            <img src="https://www.neofit-studio.de/wp-content/uploads/2025/03/neofit-logo.png" alt="Neofit Studio">
-        </div>
-
+        <img src="https://www.neofit-studio.de/wp-content/uploads/2025/03/neofit-logo.png" alt="Neofit">
         <div class="divider"></div>
-
-        <div class="sponsor-wrapper" style="animation-delay: 2s;">
-            <img src="https://deltatrans.de/wp-content/uploads/2023/04/deltatrans_logo_90.png" alt="Deltatrans">
-        </div>
-
+        <img src="https://deltatrans.de/wp-content/uploads/2023/04/deltatrans_logo_90.png" alt="Deltatrans">
     </div>
 </footer>
 
 <script>
-    // Automatischer Reload der Seite alle 10 Minuten, 
-    // um den Iframe frisch zu halten und eventuelle Hänger zu vermeiden.
-    setTimeout(function(){
-       location.reload();
-    }, 600000); 
+    // FUNKTION FÜR DIE UHRZEIT
+    function updateClock() {
+        const now = new Date();
+        
+        // Zeit formatieren (HH:MM:SS)
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+
+        // Datum formatieren (z.B. Montag, 12. Januar 2026)
+        const options = { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' };
+        document.getElementById('date').textContent = now.toLocaleDateString('de-DE', options);
+    }
+
+    // Jede Sekunde aktualisieren
+    setInterval(updateClock, 1000);
+    updateClock(); // Sofort beim Start aufrufen
+
+    // Seite alle 15 Minuten komplett neu laden (Sicherheit)
+    setTimeout(() => location.reload(), 900000);
 </script>
 
 </body>
