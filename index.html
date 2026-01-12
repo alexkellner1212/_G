@@ -3,114 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GSV Eintracht Baunatal - Wintercup 2026</title>
+    <title>GSV Eintracht Baunatal - E-Jugend Wintercup 2026</title>
     <style>
         :root {
             --gsv-blue: #00458b;
+            --gsv-blue-light: #0056ad;
             --gsv-white: #ffffff;
             --accent-silver: #e5e5e5;
+            --sponsor-bg: #f9f9f9;
         }
+
+        * { box-sizing: border-box; }
 
         body, html {
             margin: 0; padding: 0; height: 100%;
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
             background-color: var(--gsv-white);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden; /* Verhindert Scrollen der Hauptseite */
         }
 
-        /* Responsive Header */
+        /* --- HEADER --- */
         header {
-            background-color: var(--gsv-blue);
+            background: linear-gradient(135deg, var(--gsv-blue) 0%, var(--gsv-blue-light) 100%);
+            color: white;
+            padding: 10px 30px;
             display: flex;
-            flex-direction: row;
             align-items: center;
             justify-content: space-between;
-            padding: 10px 20px;
-            color: white;
             border-bottom: 4px solid var(--accent-silver);
-            min-height: 80px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 10;
         }
 
         .header-left {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 25px;
         }
 
         .gsv-logo {
-            height: 50px;
+            height: 75px;
             background: white;
-            padding: 5px;
-            border-radius: 5px;
+            padding: 8px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .claim-img {
+            height: 45px;
+            filter: brightness(0) invert(1);
         }
 
         .qr-section {
+            background: white;
+            padding: 6px;
+            border-radius: 8px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            background: white;
-            padding: 5px;
-            border-radius: 5px;
+            transition: transform 0.3s ease;
         }
 
-        .qr-code {
-            width: 50px;
-            height: 50px;
-        }
+        .qr-section:hover { transform: scale(1.05); }
+
+        .qr-code { width: 60px; height: 60px; }
 
         .qr-text {
+            color: var(--gsv-blue);
             font-size: 0.6rem;
             font-weight: 900;
-            color: var(--gsv-blue);
+            margin-top: 2px;
             text-transform: uppercase;
         }
 
-        .header-title h1 {
+        .header-info { text-align: right; }
+
+        .header-info h1 {
             margin: 0;
-            font-size: 1.2rem;
+            font-size: 2.2rem;
             text-transform: uppercase;
+            font-weight: 900;
+            letter-spacing: 1px;
+            line-height: 1;
         }
 
-        /* Spielplan Bereich */
+        .header-info p {
+            margin: 5px 0 0 0;
+            font-size: 1.1rem;
+            color: var(--accent-silver);
+            font-weight: 300;
+        }
+
+        /* --- MAIN / IFRAME --- */
         main {
-            height: calc(100vh - 220px);
-            width: 100%;
+            flex-grow: 1;
+            position: relative;
+            background: #eee;
         }
 
         iframe {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
             border: none;
-            width: 100%;
-            height: 100%;
         }
 
-        /* Responsive Footer */
+        /* --- OPTIMIERTER SPONSOREN-FOOTER --- */
         footer {
             background: var(--gsv-white);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px 10px;
             border-top: 5px solid var(--gsv-blue);
+            padding: 15px 20px 10px 20px;
             position: relative;
-        }
-
-        .sponsor-container {
             display: flex;
-            flex-direction: row;
-            align-items: center;
             justify-content: center;
-            gap: 30px;
-            width: 100%;
-        }
-
-        footer img {
-            height: 50px;
-            max-width: 40%;
-            object-fit: contain;
-        }
-
-        .divider {
-            width: 2px; height: 40px; background: #ddd;
+            align-items: center;
+            min-height: 110px;
         }
 
         .label-box {
@@ -120,39 +128,71 @@
             transform: translateX(-50%);
             background: var(--gsv-blue);
             color: white;
-            padding: 4px 20px;
-            font-size: 0.8rem;
-            border-radius: 15px;
-            white-space: nowrap;
+            padding: 4px 25px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
 
-        /* --- MOBILE ANPASSUNGEN --- */
-        @media (max-width: 600px) {
+        .sponsor-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 60px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .sponsor-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.4s ease;
+            animation: softPulse 4s infinite ease-in-out;
+        }
+
+        /* Sanftes Hervorheben der Werbung */
+        @keyframes softPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+
+        .sponsor-container img {
+            height: 75px;
+            max-width: 250px;
+            object-fit: contain;
+            filter: grayscale(20%);
+            transition: filter 0.3s ease;
+        }
+
+        .sponsor-wrapper:hover img {
+            filter: grayscale(0%);
+        }
+
+        .divider {
+            width: 1px;
+            height: 50px;
+            background: linear-gradient(to bottom, transparent, #ccc, transparent);
+        }
+
+        /* --- MOBILE OPTIMIERUNG --- */
+        @media (max-width: 850px) {
             header {
                 flex-direction: column;
-                text-align: center;
-                gap: 10px;
-            }
-
-            .header-title h1 {
-                font-size: 1.4rem;
-            }
-
-            main {
-                height: calc(100vh - 300px);
-            }
-
-            .qr-section {
-                display: none; /* Auf dem Handy braucht man den QR-Code nicht */
-            }
-
-            footer {
-                height: auto;
-            }
-
-            .sponsor-container {
+                padding: 15px;
                 gap: 15px;
             }
+            .qr-section { display: none; }
+            .header-info { text-align: center; }
+            .header-info h1 { font-size: 1.6rem; }
+            footer { padding-top: 25px; }
+            .sponsor-container { gap: 30px; }
+            .sponsor-container img { height: 50px; max-width: 140px; }
+            .sponsor-wrapper { animation: none; }
         }
     </style>
 </head>
@@ -161,13 +201,15 @@
 <header>
     <div class="header-left">
         <img src="https://www.eintracht-baunatal.de/assets/images/5/GSV-Logo-c806e7ce.svg" alt="GSV Logo" class="gsv-logo">
+        <img src="https://www.eintracht-baunatal.de/assets/images/5/gsv-claim-52d4940a.svg" alt="E-Jugend" class="claim-img">
         <div class="qr-section">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://mytman.io/turnierplan-vollbild/?turnier_id=6379" alt="QR" class="qr-code">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://mytman.io/turnierplan-vollbild/?turnier_id=6379" alt="QR Plan" class="qr-code">
             <div class="qr-text">Mobil-Plan</div>
         </div>
     </div>
-    <div class="header-title">
+    <div class="header-info">
         <h1>Wintercup 2026</h1>
+        <p>E-Jugend (Jahrgang 2016)</p>
     </div>
 </header>
 
@@ -178,11 +220,27 @@
 <footer>
     <div class="label-box">Unsere Partner</div>
     <div class="sponsor-container">
-        <img src="https://www.neofit-studio.de/wp-content/uploads/2025/03/neofit-logo.png" alt="Neofit">
+        
+        <div class="sponsor-wrapper">
+            <img src="https://www.neofit-studio.de/wp-content/uploads/2025/03/neofit-logo.png" alt="Neofit Studio">
+        </div>
+
         <div class="divider"></div>
-        <img src="https://deltatrans.de/wp-content/uploads/2023/04/deltatrans_logo_90.png" alt="Deltatrans">
+
+        <div class="sponsor-wrapper" style="animation-delay: 2s;">
+            <img src="https://deltatrans.de/wp-content/uploads/2023/04/deltatrans_logo_90.png" alt="Deltatrans">
+        </div>
+
     </div>
 </footer>
+
+<script>
+    // Automatischer Reload der Seite alle 10 Minuten, 
+    // um den Iframe frisch zu halten und eventuelle Hänger zu vermeiden.
+    setTimeout(function(){
+       location.reload();
+    }, 600000); 
+</script>
 
 </body>
 </html>
